@@ -1,0 +1,8 @@
+{
+  "name": "Expense Tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "23f2bd72"
+}
