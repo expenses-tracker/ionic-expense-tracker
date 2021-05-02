@@ -9,20 +9,20 @@ export class UserDetailService {
 
   private user: UserDetails;
 
-  constructor(private _userService: UserData) { }
+  constructor(private userService: UserData) { }
 
   currentUser() {
     return this.user;
   }
 
   fetchUserDetail() {
-    return this._userService.getUsers().pipe(map((user) => {
+    return this.userService.getUsers().pipe(map((user) => {
       this.user = user;
       return user;
     }));
   }
 
   logout() {
-    return this._userService.logout();
+    return this.userService.logout();
   }
 }

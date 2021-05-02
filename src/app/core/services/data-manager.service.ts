@@ -7,7 +7,7 @@ export class DataManagerService {
 
   constructor() { }
 
-  saveInSession(name: string, data: Object): void {
+  saveInSession(name: string, data: string): void {
     sessionStorage.setItem(name, JSON.stringify(data));
   }
 
@@ -15,15 +15,15 @@ export class DataManagerService {
     sessionStorage.removeItem(name);
   }
 
-  getFromSession(name: string): Object {
-    return JSON.parse(sessionStorage.getItem(name));
+  getFromSession(name: string): string {
+    return sessionStorage.getItem(name);
   }
 
   clearAllSession() {
     sessionStorage.clear();
   }
 
-  saveInLocal(name: string, data: Object): void {
+  saveInLocal(name: string, data: string): void {
     localStorage.setItem(name, JSON.stringify(data));
   }
 
@@ -31,8 +31,8 @@ export class DataManagerService {
     localStorage.removeItem(name);
   }
 
-  getFromLocal(name: string): Object {
-    return JSON.parse(sessionStorage.getItem(name));
+  getFromLocal(name: string): string {
+    return sessionStorage.getItem(name);
   }
 
   clearAllLocal() {

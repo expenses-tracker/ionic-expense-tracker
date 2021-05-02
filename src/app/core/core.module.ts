@@ -1,10 +1,10 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 
-import { throwIfAlreadyLoaded } from "./module-import-guard";
-import { HttpErrorInterceptor } from "./services/http/httperrorinterceptor.service";
-import { ToasterService } from "./services/toaster.service";
+import { throwIfAlreadyLoaded } from './module-import-guard';
+import { HttpErrorInterceptor } from './services/http/httperrorinterceptor.service';
+import { ToasterService } from './services/toaster.service';
 
 @NgModule({
     imports: [

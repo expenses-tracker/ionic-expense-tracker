@@ -8,38 +8,38 @@ import { ExpenseUtilService } from '../utils/expense-util.service';
 })
 export class AggregateService {
 
-  constructor(private _http: AbstractHttpService, private _util: ExpenseUtilService) { }
+  constructor(private http: AbstractHttpService, private util: ExpenseUtilService) { }
 
-  getDashboardData(dateRange: { from: Date, to: Date }) {
+  getDashboardData(dateRange: { from: Date; to: Date }) {
     const url = `${environment.service.domain}${environment.service.endpoints.dashboard}`;
-    return this._http.post(url, dateRange);
+    return this.http.post(url, dateRange);
   }
 
-  getMonthlyExpense(dateRange: { from: Date, to: Date }) {
+  getMonthlyExpense(dateRange: { from: Date; to: Date }) {
     const payload = this.getDateRange(dateRange);
     const url = `${environment.service.domain}${environment.service.endpoints.monthlyExpense}`;
-    return this._http.post(url, payload);
+    return this.http.post(url, payload);
   }
 
   getMonthlyCategoryExpense() {
     const url = `${environment.service.domain}${environment.service.endpoints.monthlyCategoryExpense}`;
-    return this._http.get(url);
+    return this.http.get(url);
   }
 
   getMonthlyPaymentTypeExpense() {
     const url = `${environment.service.domain}${environment.service.endpoints.monthlyPaymentTypeExpense}`;
-    return this._http.get(url);
+    return this.http.get(url);
   }
 
-  getMonthlyIncome(dateRange: { from: Date, to: Date }) {
+  getMonthlyIncome(dateRange: { from: Date; to: Date }) {
     const payload = this.getDateRange(dateRange);
     const url = `${environment.service.domain}${environment.service.endpoints.monthlyIncome}`;
-    return this._http.post(url, payload);
+    return this.http.post(url, payload);
   }
 
-  private getDateRange(dateRange: { from: Date, to: Date }) {
+  private getDateRange(dateRange: { from: Date; to: Date }) {
     const year = dateRange.from.getFullYear();
-    const range = this._util.dashboardDateRange(String(year));
+    const range = this.util.dashboardDateRange(String(year));
     return range;
   }
 }

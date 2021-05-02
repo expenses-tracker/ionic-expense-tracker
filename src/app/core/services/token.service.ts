@@ -6,34 +6,34 @@ import { DataManagerService } from './data-manager.service';
 })
 export class TokenService {
 
-  private readonly AUTH_DATA = 'auth-data';
-  private readonly AUTH_TOKEN = 'auth-token';
+  private readonly authData = 'auth-data';
+  private readonly authToken = 'auth-token';
 
-  constructor(private _dataManager: DataManagerService) { }
+  constructor(private dataManager: DataManagerService) { }
 
   saveAuthData(data: any) {
-    this._dataManager.saveInSession(this.AUTH_DATA, data);
+    this.dataManager.saveInSession(this.authData, data);
     this.saveToken(data?.token);
   }
 
   getAuthData(): any {
-    return this._dataManager.getFromSession(this.AUTH_DATA);
+    return this.dataManager.getFromSession(this.authData);
   }
 
   clearAuthData() {
     this.clearToken();
-    this._dataManager.deleteFromSession(this.AUTH_DATA);
+    this.dataManager.deleteFromSession(this.authData);
   }
 
   saveToken(token: string) {
-    this._dataManager.saveInSession(this.AUTH_TOKEN, token);
+    this.dataManager.saveInSession(this.authToken, token);
   }
 
   getToken(): string {
-    return this._dataManager.getFromSession(this.AUTH_TOKEN)?.toString();
+    return this.dataManager.getFromSession(this.authToken)?.toString();
   }
 
   clearToken() {
-    this._dataManager.deleteFromSession(this.AUTH_TOKEN);
+    this.dataManager.deleteFromSession(this.authToken);
   }
 }

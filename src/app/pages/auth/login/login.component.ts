@@ -15,22 +15,22 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _authService: AuthService,
-    private _router: Router) { }
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
-    this._authService.clearAuthData();
+    this.authService.clearAuthData();
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9.%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       rememberMe: [false]
     });
   }
 
   onLogin() {
-    this._authService.login(this.loginForm.value).subscribe((resp) => {
-      if (this._authService.isAuthenticated()) {
-        this._router.navigateByUrl('/tabs/tab1');
+    this.authService.login(this.loginForm.value).subscribe((resp) => {
+      if (this.authService.isAuthenticated()) {
+        this.router.navigateByUrl('/tabs/tab1');
       }
     });
   }

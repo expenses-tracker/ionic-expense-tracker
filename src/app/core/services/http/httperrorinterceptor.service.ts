@@ -12,10 +12,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           let errorMsg = '';
           if (error.error instanceof ErrorEvent) {
             errorMsg = `Error: ${error.error.message}`;
-            this.toast.showToast(ToastType.DANGER, 'Application Error', errorMsg);
+            this.toast.showToast(ToastType.danger, 'Application Error', errorMsg);
           } else {
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-            this.toast.showToast(ToastType.DANGER, 'Service Error', errorMsg);
+            this.toast.showToast(ToastType.danger, 'Service Error', errorMsg);
           }
           return throwError(errorMsg);
         })

@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ExpenseUtilService {
 
-  constructor() { }
-
   private defaultMonths = ['January',
   'February',
   'March',
@@ -19,6 +17,8 @@ export class ExpenseUtilService {
   'October',
   'November',
   'December'];
+
+  constructor() { }
 
   monthNames() {
     return this.defaultMonths;
@@ -44,7 +44,7 @@ export class ExpenseUtilService {
     return new Date().getFullYear();
   }
 
-  monthDateRange(month: string, year: string): { from: Date, to: Date } {
+  monthDateRange(month: string, year: string): { from: Date; to: Date } {
     const monthIdx = this.defaultMonths.indexOf(month);
     if (monthIdx === -1) {
       return;
@@ -56,7 +56,7 @@ export class ExpenseUtilService {
     };
   }
 
-  dashboardDateRange(year: string): { from: Date, to: Date } {
+  dashboardDateRange(year: string): { from: Date; to: Date } {
     if (!year) {
       year = String(new Date().getFullYear());
     }

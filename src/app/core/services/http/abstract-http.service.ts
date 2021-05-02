@@ -9,43 +9,39 @@ import { TokenService } from '../token.service';
 export class AbstractHttpService {
 
   constructor(
-    private _http: HttpClient, private _token: TokenService) { }
-
-  private getToken() {
-    return this._token.getToken();
-  }
-
-  private defaultHeaders() {
-    return new HttpHeaders({
-      Authorization: `Bearer ${this.getToken()}`,
-    });
-  }
+    private http: HttpClient, private token: TokenService) { }
 
   get(url: string) {
-    return this._http.get(url, {
-      // tslint:disable-next-line: trailing-comma
+    return this.http.get(url, {
       headers: this.defaultHeaders()
     });
   }
 
-  post(url: string, body: Object) {
-    return this._http.post(url, body, {
-      // tslint:disable-next-line: trailing-comma
+  post(url: string, body: any) {
+    return this.http.post(url, body, {
       headers: this.defaultHeaders()
     });
   }
 
-  put(url: string, body: Object) {
-    return this._http.put(url, body, {
-      // tslint:disable-next-line: trailing-comma
+  put(url: string, body: any) {
+    return this.http.put(url, body, {
       headers: this.defaultHeaders()
     });
   }
 
   delete(url: string) {
-    return this._http.delete(url, {
-      // tslint:disable-next-line: trailing-comma
+    return this.http.delete(url, {
       headers: this.defaultHeaders()
+    });
+  }
+
+  private getToken() {
+    return this.token.getToken();
+  }
+
+  private defaultHeaders() {
+    return new HttpHeaders({
+      authorization: `Bearer ${this.getToken()}`,
     });
   }
 }

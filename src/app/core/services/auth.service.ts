@@ -11,31 +11,31 @@ import { TokenService } from './token.service';
 })
 export class AuthService {
 
-  constructor(private _http: HttpClient, private _token: TokenService) { }
+  constructor(private http: HttpClient, private token: TokenService) { }
 
   getUrl(routeArg: string) {
     return `${environment.service.domain}${environment.service.endpoints[routeArg]}`;
   }
 
   isAuthenticated() {
-    return this._token.getToken()?.length > 0;
+    return this.token.getToken()?.length > 0;
   }
 
   login(data: LoginData) {
-    return this._http.post(this.getUrl('login'), data)
+    return this.http.post(this.getUrl('login'), data)
     .pipe(
-      tap((data) => this._token.saveAuthData(data))
+      tap((authData) => this.token.saveAuthData(authData))
     );
   }
 
   logout(data: any) {
-    return this._http.post(this.getUrl('logout'), data)
+    return this.http.post(this.getUrl('logout'), data)
     .pipe(
-      tap(() => this._token.clearAuthData())
+      tap(() => this.token.clearAuthData())
     );
   }
 
   clearAuthData() {
-    this._token.clearAuthData();
+    this.token.clearAuthData();
   }
 }
