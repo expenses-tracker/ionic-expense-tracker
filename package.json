@@ -13,6 +13,7 @@
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
+    "lint:ci": "npm run lint && npm run lint:styles",
     "e2e": "ng e2e"
   },
   "private": true,

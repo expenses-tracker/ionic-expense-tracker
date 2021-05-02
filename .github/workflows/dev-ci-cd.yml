@@ -35,8 +35,8 @@ jobs:
         run: npm install
       
       # Check for lint issues
-      - name: Run Lint
-        run: npm run lint:ci
+      # - name: Run Lint
+      #   run: npm run lint:ci
         
       # Build
       - name: Build
