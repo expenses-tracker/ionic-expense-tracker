@@ -6,7 +6,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:local": "ng serve --c=local",
+    "start:dev": "ng serve --c=development",
     "build": "ng build",
+    "build:dev": "npm run build -- --c=development",
+    "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

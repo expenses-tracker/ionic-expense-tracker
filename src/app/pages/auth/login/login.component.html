@@ -1,0 +1,32 @@
+<ion-card class="layout">
+  <ion-card-header>
+    <ion-card-title class="ion-text-center title">
+      Login
+    </ion-card-title>
+    <ion-card-subtitle class="ion-text-center">Hello! Log in with your email.</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+      <form [formGroup]="loginForm">
+        <ion-item>
+          <ion-label position="floating">Email address <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input formControlName="email" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <div class="ion-padding">
+          <ion-checkbox color="primary" formControlName="rememberMe"></ion-checkbox>
+          <ion-label position="inline"> Remember me </ion-label>
+        </div>
+        <br>
+      </form>
+    <ion-button type="submit" color="primary" expand="block" [disabled]="loginForm.invalid" (click)="onLogin()">
+      Log in
+    </ion-button>
+    <br> 
+    <ion-label class="ion-padding-start" position="inline">Don't have an account? </ion-label>
+    <span><a href="auth/register">Register</a></span>
+  </ion-card-content>
+</ion-card>
