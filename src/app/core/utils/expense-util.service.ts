@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class ExpenseUtilService {
   'December'];
 
   constructor() { }
+
+  static getUrl(routeArg: string) {
+    return `${environment.service.domain}${environment.service.endpoints[routeArg]}`;
+  }
 
   monthNames() {
     return this.defaultMonths;

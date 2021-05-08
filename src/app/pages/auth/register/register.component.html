@@ -1,3 +1,49 @@
-<p>
-  register works!
-</p>
+<ion-content class="ion-padding">
+  <ion-text class="ion-text-center main-title-align" color="primary">
+    <h1>Expense Tracker</h1>
+  </ion-text>
+  <ion-card class="layout">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center title">
+        Register
+      </ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+        <form [formGroup]="registerForm">
+          <ion-item>
+            <ion-label position="floating">Full Name <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="fullName" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email address <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="email" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Repeat Password <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="repeatPassword" type="password"></ion-input>
+          </ion-item>
+          <ng-container *ngIf="repeatPassword.dirty || repeatPassword.touched">
+            <ion-text class="ion-padding" *ngIf="doesPasswordsMatch()" color="danger">
+              Passwords do not match.
+            </ion-text>
+          </ng-container>
+          <div class="ion-padding">
+            <ion-checkbox color="primary" formControlName="agreeTerms"></ion-checkbox>
+            <ion-label class="checkbox-align" position="inline"> Agree to <span><a href="/termsandconditions">Terms & Conditions</a></span> </ion-label>
+          </div>
+          <br>
+        </form>
+      <ion-button type="submit" color="primary" expand="block" [disabled]="registerForm.invalid || apiInProgress" (click)="onRegister()">
+        Register
+      </ion-button>
+      <br> 
+      <ion-label class="ion-padding-start" position="inline">Already have an account? </ion-label>
+      <span><a href="/auth/login">Log in</a></span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

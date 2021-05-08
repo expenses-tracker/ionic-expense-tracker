@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+
+import { UserDetails } from '../models/userdetails.model';
 import { LoginData } from '../models/login.model';
+
+import { ExpenseUtilService } from '../utils/expense-util.service';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -14,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient, private token: TokenService) { }
 
   getUrl(routeArg: string) {
-    return `${environment.service.domain}${environment.service.endpoints[routeArg]}`;
+    return ExpenseUtilService.getUrl(routeArg);
   }
 
   isAuthenticated() {
@@ -33,6 +35,10 @@ export class AuthService {
     .pipe(
       tap(() => this.token.clearAuthData())
     );
+  }
+
+  register(userDetails: UserDetails) {
+    return this.http.post(this.getUrl('register'), userDetails);
   }
 
   clearAuthData() {

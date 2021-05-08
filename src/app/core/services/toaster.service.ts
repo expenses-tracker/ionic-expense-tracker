@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-
-export enum ToastType {
-  primary = 'primary',
-  success = 'success',
-  warning = 'warning',
-  danger = 'danger',
-}
+import { ToasterInput } from '../models/toaster-input.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +9,13 @@ export class ToasterService {
 
   constructor(private toaster: ToastController) { }
 
-  async showToast(type: ToastType, title: string, content: string) {
-    const titleContent = title ? `${title}` : '';
-
+  async showToast(input: ToasterInput) {
     const toast = await this.toaster.create({
       animated: true,
-      color: type,
-      header: titleContent,
-      message: content,
-      position: 'top',
+      color: input.type,
+      header: input.title || '',
+      message: input.content,
+      position: input.position || 'bottom',
       duration: 2000,
       buttons: []
     });
