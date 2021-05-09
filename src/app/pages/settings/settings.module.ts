@@ -7,7 +7,7 @@ import { SettingsPage } from './settings.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { SettingsPageRoutingModule } from './settings-routing.module';
-import { HeaderComponent } from '../../shared/components/header/header.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import { HeaderComponent } from '../../shared/components/header/header.component
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: SettingsPage }]),
     SettingsPageRoutingModule,
+    SharedModule
   ],
-  declarations: [SettingsPage, HeaderComponent]
+  declarations: [SettingsPage]
 })
 export class SettingsPageModule {}

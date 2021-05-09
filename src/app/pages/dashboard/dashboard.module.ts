@@ -6,7 +6,7 @@ import { DashboardPage } from './dashboard.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
-import { HeaderComponent } from '../../shared/components/header/header.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,8 +14,9 @@ import { HeaderComponent } from '../../shared/components/header/header.component
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    DashboardPageRoutingModule
+    DashboardPageRoutingModule,
+    SharedModule
   ],
-  declarations: [DashboardPage, HeaderComponent]
+  declarations: [DashboardPage]
 })
 export class DashboardPageModule {}
