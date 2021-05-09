@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastType } from 'src/app/core/models/toaster-input.model';
 
+import { ToastType } from '../../../core/models/toaster-input.model';
 import { UserDetails } from '../../../core/models/userdetails.model';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { ToasterService } from '../../../core/services/toaster.service';
+import { LoggerService } from '../../../core/services/logger.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toaster: ToasterService
+    private toaster: ToasterService,
+    private logger: LoggerService
   ) { }
 
   ngOnInit() {
@@ -64,7 +66,7 @@ export class RegisterComponent implements OnInit {
           type: ToastType.danger,
           content: `Registration Failed! Please try again.`
         });
-        console.error(err);
+        this.logger.error(err);
       }
     });
   }

@@ -27,6 +27,7 @@
     "@ionic/angular": "^5.5.2",
     "exceljs": "^4.2.1",
     "file-saver": "^2.0.5",
+    "ngx-logger": "^4.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

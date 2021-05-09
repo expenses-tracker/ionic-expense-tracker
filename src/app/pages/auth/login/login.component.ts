@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastType } from 'src/app/core/models/toaster-input.model';
+
+import { ToastType } from '../../../core/models/toaster-input.model';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { ToasterService } from '../../../core/services/toaster.service';
+import { LoggerService } from '../../../core/services/logger.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toaster: ToasterService) { }
+    private toaster: ToasterService,
+    private logger: LoggerService) { }
 
   ngOnInit() {
     this.authService.clearAuthData();
@@ -40,7 +43,7 @@ export class LoginComponent implements OnInit {
             type: ToastType.success,
             content: 'Login Successful'
           });
-          this.router.navigateByUrl('/tabs/tab1');
+          this.router.navigateByUrl('/tabs/dashboard');
         } else {
           this.handleLoginError(`Unable to authenticate. No token found.`);
         }
@@ -55,7 +58,7 @@ export class LoginComponent implements OnInit {
       type: ToastType.danger,
       content: 'Login Failed. Please try again.'
     });
-    console.error(err);
+    this.logger.error(err);
   }
 
 }
