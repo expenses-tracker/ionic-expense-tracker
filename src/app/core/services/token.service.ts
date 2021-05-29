@@ -12,7 +12,7 @@ export class TokenService {
   constructor(private dataManager: DataManagerService) { }
 
   saveAuthData(data: any) {
-    this.dataManager.saveInSession(this.authData, data);
+    this.dataManager.saveInSession(this.authData, JSON.stringify(data));
     this.saveToken(data?.token);
   }
 

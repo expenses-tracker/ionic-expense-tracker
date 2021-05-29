@@ -1,4 +1,29 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <app-header title="Settings" [hideSettingsNavIcon]=true></app-header>
-  <app-explore-container name="Settings page"></app-explore-container>
+
+    <div class="profile-info" *ngIf="(user$ | async) as user">
+      <ion-avatar class="photo">
+        <img *ngIf="photo" [src]="photo" alt="user_photo">
+        <img *ngIf="!photo" src="assets/icon/avatar.svg" alt="default_avatar">
+        <ion-button class="avatar-camera" (click)="onCameraSelect()">
+          <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
+        </ion-button>
+      </ion-avatar>
+      
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>{{ user?.userId }}</ion-card-subtitle>
+          <ion-card-title>{{ user?.fullName }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label position="fixed">{{ user?.email }}</ion-label>
+          <br>
+          <ion-button class="margin-top" (click)="onLogOut()">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            Log Out
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  
 </ion-content>

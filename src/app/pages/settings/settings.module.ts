@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { SettingsPageRoutingModule } from './settings-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { PhotoService } from '../../shared/services/photo/photo.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,9 @@ import { SharedModule } from '../../shared/shared.module';
     SettingsPageRoutingModule,
     SharedModule
   ],
-  declarations: [SettingsPage]
+  declarations: [SettingsPage],
+  providers: [
+    PhotoService
+  ]
 })
 export class SettingsPageModule {}

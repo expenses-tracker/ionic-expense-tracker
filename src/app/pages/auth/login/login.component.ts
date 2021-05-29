@@ -7,6 +7,7 @@ import { ToastType } from '../../../core/models/toaster-input.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { LoggerService } from '../../../core/services/logger.service';
+import { UserDetailService } from '../../../core/services/user-detail.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,12 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toaster: ToasterService,
-    private logger: LoggerService) { }
+    private logger: LoggerService,
+    private userDetails: UserDetailService) { }
+
+  get emailValue(): string {
+    return this.loginForm.get('email').value;
+  }
 
   ngOnInit() {
     this.authService.clearAuthData();
@@ -43,6 +49,7 @@ export class LoginComponent implements OnInit {
             type: ToastType.success,
             content: 'Login Successful'
           });
+          this.userDetails.getUserData(this.emailValue).subscribe();
           this.router.navigateByUrl('/tabs/dashboard');
         } else {
           this.handleLoginError(`Unable to authenticate. No token found.`);
@@ -52,7 +59,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  handleLoginError(err?: any) {
+  handleLoginError(err: any) {
     this.apiInProgress = false;
     this.toaster.showToast({
       type: ToastType.danger,
