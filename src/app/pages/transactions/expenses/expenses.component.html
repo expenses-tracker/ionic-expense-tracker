@@ -1,0 +1,53 @@
+<app-header title="Expenses" [hideSettingsNavIcon]="true"></app-header>
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="100" pullMax="200">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-list>
+      <ion-item-sliding *ngFor="let expense of expensesData">
+        <ion-item>
+          <ion-row class="ion-align-items-center">
+            <ion-col>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-text color="primary">
+                    <b>{{ expense.description }}</b>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="8" class="ion-align-self-start">
+                  <ion-text color="secondary">
+                    {{ expense.category }}
+                  </ion-text>
+                </ion-col>
+                <ion-col size="4" class="ion-align-self-end">
+                  <ion-text color="secondary">
+                    {{ expense.amount | currency:'INR' }}
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="8" class="ion-align-self-start">
+                  <ion-text color="medium">
+                    {{ expense.paymentType }}
+                  </ion-text>
+                </ion-col>
+                <ion-col size="4" class="ion-align-self-end">
+                  <ion-text color="medium">
+                    {{ expense.dated | date: 'mediumDate' }}
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="tertiary" (click)="onEdit(expense)">Edit</ion-item-option>
+          <ion-item-option color="danger" (click)="onDelete(expense)">Delete</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-list>
+</ion-content>

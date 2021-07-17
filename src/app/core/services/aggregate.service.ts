@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AbstractHttpService } from './http/abstract-http.service';
 import { environment } from '../../../environments/environment';
 import { ExpenseUtilService } from '../utils/expense-util.service';
+import { Observable } from 'rxjs';
+import { DashboardData } from '../models/dashboard.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class AggregateService {
 
   getDashboardData(dateRange: { from: Date; to: Date }) {
     const url = `${environment.service.domain}${environment.service.endpoints.dashboard}`;
-    return this.http.post(url, dateRange);
+    return this.http.post(url, dateRange) as Observable<DashboardData>;
   }
 
   getMonthlyExpense(dateRange: { from: Date; to: Date }) {

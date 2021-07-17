@@ -2,7 +2,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { ToastType } from '../../models/toaster-input.model';
 import { LoggerService } from '../logger.service';
@@ -54,24 +54,23 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         let errorMsg = '';
           if (error.error instanceof ErrorEvent) {
             errorMsg = `Error: ${error.error.message}`;
-            this.toast.showToast({
-              type: ToastType.danger,
-              title: 'Application Error',
-              content: errorMsg
-            });
           } else {
-            errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-            this.toast.showToast({
-              type: ToastType.danger,
-              title: 'Service Error',
-              content: errorMsg
-            });
+            if (error.error) {
+              errorMsg = error.error.message;
+            } else {
+              errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+            }
             if (error.status === 401) {
               this.router.navigateByUrl('/auth/login');
               errorMsg = 'You are not authorized. Please login.';
             }
           }
-          this.logger.error(errorMsg, error);
+          this.toast.showToast({
+            type: ToastType.danger,
+            title: 'Error',
+            content: errorMsg
+          });
+          // this.logger.error(error);
           return throwError(errorMsg);
       }));
   }

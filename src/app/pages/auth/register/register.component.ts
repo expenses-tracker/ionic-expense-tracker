@@ -60,13 +60,8 @@ export class RegisterComponent implements OnInit {
         });
         this.router.navigateByUrl(`/auth/login`);
       },
-      error: (err) => {
+      complete: () => {
         this.apiInProgress = false;
-        this.toaster.showToast({
-          type: ToastType.danger,
-          content: `Registration Failed! Please try again.`
-        });
-        this.logger.error(err);
       }
     });
   }

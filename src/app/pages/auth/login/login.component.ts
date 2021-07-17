@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('email').value;
   }
 
+  get rememberMeValue(): boolean {
+    return this.loginForm.get('rememberMe').value;
+  }
+
   ngOnInit() {
     this.authService.clearAuthData();
     this.loginForm = this.fb.group({
@@ -38,6 +42,10 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4)]],
       rememberMe: [false]
     });
+  }
+
+  onRememberMe(value: boolean) {
+    this.loginForm.get('rememberMe').patchValue(value);
   }
 
   onLogin() {
